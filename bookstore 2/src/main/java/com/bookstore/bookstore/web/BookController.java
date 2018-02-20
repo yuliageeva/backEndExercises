@@ -11,12 +11,15 @@ import org.springframework.web.bind.annotation.RequestMethod;
 
 import com.bookstore.bookstore.domain.Book;
 import com.bookstore.bookstore.domain.BookRepository;
+import com.bookstore.bookstore.domain.CategoryRepository;
 
 
 @Controller
 public class BookController {
 	@Autowired
 	private BookRepository repository;
+	@Autowired
+	private CategoryRepository crepository;
 	
 	
 	@RequestMapping(value ="/booklist", method = RequestMethod.GET)
@@ -28,6 +31,7 @@ public class BookController {
 	 @RequestMapping(value="/add")
 	 public String addAttribute(Model model){
 		 model.addAttribute("book", new Book());
+		 model.addAttribute("categories",crepository.findAll());
 		 return "addBook";
 	 }
 	 
